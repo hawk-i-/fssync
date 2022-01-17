@@ -7,9 +7,23 @@ import (
 	"github.com/spf13/viper"
 )
 
+//FSLocation defines sources and destinations for filesync
+type FSLocation struct {
+	Host string `mapstructure:"host"`
+	Path string `mapstructure:"path"`
+	Type string `mapstructure:"type"`
+}
+
+//SyncEntry for fssync
+type SyncEntry struct {
+	Source FSLocation `mapstructure:"source"`
+	Target FSLocation `mapstructure:"target"`
+}
+
 // Config object for fssync
 type Config struct {
-	Version string `mapstructure:"version"`
+	Version string      `mapstructure:"version"`
+	Entries []SyncEntry `mapstructure:"entries"`
 }
 
 // NewConfig generates Config object pointer for config file
